@@ -62,7 +62,7 @@ export default function Activities() {
       <img
         src={squigglyLine}
         alt=""
-        className="absolute -bottom-8 left-6 w-[clamp(110px,16vw,190px)] md:hidden pointer-events-none opacity-60 z-20 rotate-[15deg] max-sm:w-[100px] max-sm:-bottom-5 max-sm:left-3"
+        className="absolute -bottom-8 left-0 w-[clamp(110px,16vw,190px)] md:hidden pointer-events-none opacity-60 z-20 rotate-[15deg] max-sm:w-[100px] max-sm:-bottom-5"
         loading="lazy"
         aria-hidden="true"
       />
