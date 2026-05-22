@@ -45,9 +45,9 @@ export default function Contact() {
             {/* CTA text + button */}
             <ScrollReveal variants={fadeInUp}>
               <div className="flex flex-col items-center gap-4">
-                <p className="font-[family-name:var(--font-display)] text-[var(--color-cream)] text-[clamp(1rem,3vw,1.4rem)] text-center tracking-[0.06em]">
+                {/* <p className="font-[family-name:var(--font-display)] text-[var(--color-cream)] text-[clamp(1rem,3vw,1.4rem)] text-center tracking-[0.06em]">
                   CHECK OUR INSTAGRAM
-                </p>
+                </p> */}
 
                 <a
                   href="https://www.instagram.com/youthsociety_gkipti"
@@ -59,7 +59,7 @@ export default function Contact() {
                   <img
                     src={contactInstagramGif}
                     alt="@youthsociety_gkipti"
-                    className="h-[clamp(40px,6vw,56px)] w-auto object-contain drop-shadow-lg -my-[25%]"
+                    className="h-[220px] w-auto object-contain drop-shadow-lg -my-[36%]"
                   />
                 </a>
               </div>
