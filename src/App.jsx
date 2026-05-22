@@ -14,7 +14,7 @@ import Footer from './components/Footer/Footer';
  */
 export default function App() {
   return (
-    <main className="relative w-full overflow-x-hidden">
+    <main className="relative w-full overflow-x-clip">
       {/* 1. Hero — full-bleed group photo with overlay */}
       <Hero />
 
