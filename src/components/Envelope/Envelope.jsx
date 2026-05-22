@@ -51,6 +51,11 @@ export default function Envelope() {
       style={{ paddingBottom: 'clamp(10px, 3vw, 30px)' }} // Reduced padding
       id="envelope"
     >
+      {/* Preload open state image to prevent layout jank on first tap */}
+      <div className="hidden" aria-hidden="true">
+        <img src={envelopeOpen} alt="preload" fetchPriority="high" />
+      </div>
+
       {/* Heading */}
       <ScrollReveal variants={fadeInUp}>
         <h2 className="font-[family-name:var(--font-display)] text-[var(--color-yellow)] text-[clamp(1.6rem,5vw,2.8rem)] text-center leading-[1.3] max-w-[600px] tracking-[0.04em] mb-2">
