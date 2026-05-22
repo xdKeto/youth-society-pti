@@ -43,7 +43,7 @@ export default function Activities() {
       id="activities"
     >
       <div className="max-w-[900px] mx-auto relative z-10">
-        <div className="grid grid-cols-2 gap-x-16 gap-y-1 justify-items-center items-start max-sm:grid-cols-1">
+        <div className="grid grid-cols-2 gap-x-16 gap-y-8 justify-items-center items-start max-sm:grid-cols-1 ">
           {activities.map((act, i) => (
             <ActivityCard
               key={act.title}
@@ -62,7 +62,7 @@ export default function Activities() {
       <img
         src={squigglyLine}
         alt=""
-        className="absolute -bottom-8 left-0 w-[clamp(110px,16vw,190px)] md:hidden pointer-events-none opacity-60 z-20 rotate-[15deg] max-sm:w-[100px] max-sm:-bottom-5"
+        className="absolute -bottom-8 -left-7 w-[clamp(110px,16vw,190px)] md:hidden pointer-events-none opacity-60 z-20 rotate-[15deg] max-sm:w-[100px] max-sm:-bottom-5"
         loading="lazy"
         aria-hidden="true"
       />

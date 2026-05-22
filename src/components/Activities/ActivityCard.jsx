@@ -132,7 +132,7 @@ function YgyTitle() {
   const pathId = 'path-ygy-title';
   return (
     <svg
-      viewBox="0 0 300 65"
+      viewBox="0 0 300 25"
       className="w-full h-auto overflow-visible select-none pointer-events-none"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -163,38 +163,26 @@ function WavyTitleWrapper({ title }) {
   const normTitle = title.replace(/\s+/g, '').toUpperCase();
 
   if (normTitle === 'YOUTHCIRCLE') {
-    return (
-      <div className="absolute -top-[28px] left-1/2 -translate-x-1/2 w-[112%] max-sm:w-[104%] h-[90px] overflow-visible z-10">
-        <YouthCircleTitle />
-      </div>
-    );
+    return <YouthCircleTitle />;
   }
 
   if (normTitle === 'BONDINGTIME') {
-    return (
-      <div className="absolute -top-[28px] left-1/2 -translate-x-1/2 w-[112%] max-sm:w-[104%] h-[90px] overflow-visible z-10">
-        <BondingTimeTitle />
-      </div>
-    );
+    return <BondingTimeTitle />;
   }
 
   if (normTitle === 'TEATIME') {
-    return (
-      <div className="absolute -top-[12px] left-1/2 -translate-x-1/2 w-[112%] max-sm:w-[104%] overflow-visible z-10">
-        <TeaTimeTitle />
-      </div>
-    );
+    return <TeaTimeTitle />;
   }
 
   if (normTitle === 'YGY') {
-    return (
-      <div className="absolute -top-[16px] left-1/2 -translate-x-1/2 w-[112%] max-sm:w-[104%] h-[65px] overflow-visible z-10">
-        <YgyTitle />
-      </div>
-    );
+    return <YgyTitle />;
   }
 
-  return null;
+  return (
+    <span className="font-[family-name:var(--font-display)] text-[32px] tracking-[0.06em] text-[var(--color-yellow)] drop-shadow-[2px_3px_0px_rgba(92,45,14,0.75)]">
+      {title}
+    </span>
+  );
 }
 
 /**
@@ -224,60 +212,55 @@ export default function ActivityCard({
 
   return (
     <motion.div
-      className={`relative w-[335px] min-h-[345px] pt-15 pb-11 px-9 bg-transparent text-center flex flex-col items-center justify-start cursor-default transition-transform duration-300 ease-out hover:-translate-y-1.5 max-sm:w-[92%] max-sm:max-w-[345px] max-sm:pt-13 max-sm:pb-9 max-sm:px-8 will-change-transform ${className}`}
-      style={{
-        backgroundImage: `url(${parchmentCard})`,
-        backgroundSize: '100% 100%',
-        backgroundRepeat: 'no-repeat',
-        filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.28))',
-      }}
+      className={`relative flex flex-col items-center transition-transform duration-300 ease-out hover:-translate-y-1.5 will-change-transform ${className}`}
       variants={variants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
-      {/* ScrollFloat Title */}
-      <div className="absolute -top-[20px] left-1/2 -translate-x-1/2 w-[112%] max-sm:w-[104%] h-[90px] overflow-visible z-10 flex items-center justify-center pointer-events-none">
-        <ScrollFloat
-          animationDuration={1}
-          ease="back.out(1.7)"
-          scrollStart="top bottom+=10%"
-          scrollEnd="bottom bottom-=20%"
-          stagger={0.05}
-          containerClassName="w-full m-0 p-0 text-center"
-          textClassName="font-[family-name:var(--font-display)] text-[32px] tracking-[0.06em] text-[var(--color-yellow)] inline-block drop-shadow-[2px_3px_0px_rgba(92,45,14,0.75)]"
-        >
-          {title}
-        </ScrollFloat>
+      {/* Creative Wavy Title (Di luar card) */}
+      <div className="w-[112%] max-sm:w-[104%] h-[50px] overflow-visible z-10 flex items-center justify-center pointer-events-none mb-1">
+        <WavyTitleWrapper title={title} />
       </div>
 
-      {/* Symmetrical safe-zone container for text to prevent overflow over parchment borders */}
-      <div className="flex-1 flex flex-col justify-center items-center w-full gap-2.5 mt-2 px-1 max-sm:px-2">
-        {subtitle && (
-          <p className="font-[family-name:var(--font-body)] text-[var(--color-dark-green-text)] italic text-[clamp(0.78rem,2vw,0.9rem)] opacity-85">
-            {subtitle}
+      {/* Card Background Texture */}
+      <div
+        className="relative w-[335px] min-h-[170px] mt-2 pt-11 pb-11 px-9 bg-transparent text-center flex flex-col items-center justify-start cursor-default max-sm:w-[92vw] max-sm:max-w-[345px] max-sm:pt-9 max-sm:pb-9 max-sm:px-8"
+        style={{
+          backgroundImage: `url(${parchmentCard})`,
+          backgroundSize: '100% 100%',
+          backgroundRepeat: 'no-repeat',
+          filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.28))',
+        }}
+      >
+        {/* Symmetrical safe-zone container for text to prevent overflow over parchment borders */}
+        <div className="flex-1 flex flex-col justify-center items-center w-full gap-2.5 px-1 max-sm:px-2">
+          {subtitle && (
+            <p className="font-[family-name:var(--font-body)] text-[var(--color-dark-green-text)] italic text-[clamp(0.78rem,2vw,0.9rem)] opacity-85">
+              {subtitle}
+            </p>
+          )}
+
+          <p className="font-[family-name:var(--font-body)] text-[var(--color-dark-green-text)] text-[14.5px] leading-[1.65] max-sm:text-[13px] max-sm:leading-[1.55]">
+            {description}
           </p>
-        )}
-
-        <p className="font-[family-name:var(--font-body)] text-[var(--color-dark-green-text)] text-[14.5px] leading-[1.65] max-sm:text-[13px] max-sm:leading-[1.55]">
-          {description}
-        </p>
-      </div>
-
-      {/* Decorative asset attached directly to the card */}
-      {cardAsset && (
-        <div className={`absolute pointer-events-none z-20 ${cardAssetClass}`}>
-          <motion.img
-            src={cardAsset}
-            alt=""
-            className="w-full h-auto origin-center will-change-transform"
-            loading="lazy"
-            aria-hidden="true"
-            animate={{ rotate: [-4, 4, -4] }}
-            transition={{ duration: 0.25, repeat: Infinity, ease: 'linear' }}
-          />
         </div>
-      )}
+
+        {/* Decorative asset attached directly to the card */}
+        {cardAsset && (
+          <div className={`absolute pointer-events-none z-20 ${cardAssetClass}`}>
+            <motion.img
+              src={cardAsset}
+              alt=""
+              className="w-full h-auto origin-center will-change-transform"
+              loading="lazy"
+              aria-hidden="true"
+              animate={{ rotate: [-4, 4, -4] }}
+              transition={{ duration: 0.25, repeat: Infinity, ease: 'linear' }}
+            />
+          </div>
+        )}
+      </div>
     </motion.div>
   );
 }
