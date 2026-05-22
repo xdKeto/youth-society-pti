@@ -1,0 +1,13 @@
+/* Contact section noise texture overlay — can't be expressed in Tailwind */
+.contact-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-conic-gradient(
+    rgba(255, 255, 255, 0.01) 0% 25%,
+    transparent 0% 50%
+  );
+  background-size: 4px 4px;
+  pointer-events: none;
+  z-index: 0;
+}
