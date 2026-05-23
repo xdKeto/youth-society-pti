@@ -28,6 +28,9 @@ export default function App() {
       {/* 3. Activities — 4 program cards */}
       <Activities />
 
+      {/* Closing organic wave divider for Activities: dark brown → brown */}
+      <WaveDivider topColor="var(--color-brown)" bottomColor="var(--color-dark-brown)" flip={true} />
+
       {/* 3.5. Gallery — circular photo gallery */}
       <Gallery />
 
