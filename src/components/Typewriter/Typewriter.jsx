@@ -76,8 +76,7 @@ function SpotifyEmbed() {
   const getResponsiveHeight = () => {
     const vw = window.innerWidth;
     if (vw < 640) return 152;       // mobile — compact
-    if (vw < 1024) return 232;      // tablet
-    return 352;                      // desktop — full
+    return 352;                      // tablet/desktop — full
   };
 
   useEffect(() => {
