@@ -152,7 +152,7 @@ export default function Typewriter() {
           <VinylRecord className="absolute -right-8 bottom-[50%] w-[clamp(120px,20vw,200px)] h-[clamp(120px,20vw,200px)] pointer-events-none z-20 animate-spin-slow drop-shadow-xl max-sm:w-[90px] max-sm:h-[90px]" />
 
           {/* Heading — above the typewriter */}
-          <h2 className="font-[family-name:var(--font-display)] text-[var(--color-cream)] text-[clamp(1.4rem,4vw,2.4rem)] leading-[1.3] mb-4 tracking-[0.05em] text-center z-10 drop-shadow-md">
+          <h2 className="font-[family-name:var(--font-display)] text-[var(--color-cream)] text-[clamp(1.4rem,4vw,2.4rem)] leading-[1.3] mb-0 mt-2 tracking-[0.05em] text-center z-10 drop-shadow-md">
             LET'S WORSHIP AND JAM TOGETHER!
           </h2>
 
