@@ -171,7 +171,7 @@ export default function Typewriter() {
             />
             
             {/* Spotify embed positioned ON the typewriter's paper */}
-            <div className="absolute top-[3%] left-[50%] -translate-x-[50%] flex items-start justify-center w-[64%] max-sm:w-[70%] z-20">
+            <div className="absolute top-[3%] left-[50%] -translate-x-[50%] flex items-start justify-center w-[64%] max-sm:w-[76%] z-20">
               <SpotifyEmbed />
             </div>
           </motion.div>
