@@ -10,7 +10,7 @@ import paintbrushArm from '../../assets/illustrations/paintbrush_arm.png';
 export default function Greeting() {
   return (
     <section
-      className="relative bg-[var(--color-tan)] flex flex-col items-center font-bold overflow-visible z-10"
+      className="relative bg-[var(--color-tan)] flex flex-col items-center font-bold overflow-visible z-20"
       style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1rem, 5vw, 4rem) clamp(3rem, 8vw, 6rem)' }}
       id="greeting"
     >

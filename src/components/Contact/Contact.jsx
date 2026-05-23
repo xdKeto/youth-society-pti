@@ -7,6 +7,7 @@ import instagramPhone from '../../assets/illustrations/instagram.png';
 import contactInstagramGif from '../../assets/illustrations/contact_instagram.gif';
 import qrWhatsapp from '../../assets/illustrations/qr_whatsapp.png';
 import contactWhatsapp from '../../assets/illustrations/contact_whatsapp.png';
+import megaphone from '../../assets/illustrations/megaphone.png';
 
 export default function Contact() {
   return (
@@ -33,6 +34,7 @@ export default function Contact() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
+              
             >
               <img
                 src={instagramPhone}
@@ -40,6 +42,18 @@ export default function Contact() {
                 className="w-[clamp(220px,40vw,340px)] h-auto object-contain drop-shadow-2xl"
                 loading="lazy"
               />
+              {/* Megaphone floating illustration */}
+              <div className="absolute -bottom-10 -right-[30%] w-[clamp(120px,25vw,180px)] h-auto pointer-events-none drop-shadow-xl z-10 rotate-[10deg] max-sm:-right-12 max-sm:-bottom-10 max-sm:w-[100px]">
+                <motion.img
+                  src={megaphone}
+                  alt=""
+                  className="w-full h-auto drop-shadow-xl"
+                  aria-hidden="true"
+                  loading="lazy"
+                  animate={{ rotate: [-4, 4, -4] }}
+                  transition={{ duration: 0.75, repeat: Infinity, ease: 'linear' }}
+                />
+              </div>
             </motion.div>
 
             {/* CTA text + button */}

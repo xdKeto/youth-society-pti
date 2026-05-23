@@ -38,7 +38,7 @@ const activities = [
 export default function Activities() {
   return (
     <section
-      className="relative overflow-visible pt-16 pb-12 px-8 max-sm:pt-10 max-sm:pb-8 max-sm:px-4"
+      className="relative overflow-visible pt-16 pb-12 px-8 max-sm:pt-10 max-sm:pb-8 max-sm:px-4 z-10"
       style={{ background: 'linear-gradient(175deg, var(--color-brown) 0%, var(--color-dark-brown) 100%)' }}
       id="activities"
     >

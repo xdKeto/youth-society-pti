@@ -5,7 +5,8 @@ import FloatingElement from '../shared/FloatingElement';
 
 import { fadeInUp } from '../../utils/motionVariants';
 
-import typewriterImg from '../../assets/illustrations/typewriter.png';
+import computerImg from '../../assets/illustrations/computer.png';
+import letsJamImg from '../../assets/illustrations/lets_jam.png';
 import cassetteTapes from '../../assets/illustrations/cassette_tapes.png';
 import musicNotes from '../../assets/illustrations/music_notes.png';
 
@@ -34,59 +35,59 @@ function VinylRecord({ className }) {
  */
 function SpotifyEmbed() {
   const embedRef = useRef(null);
+  const wrapperRef = useRef(null);
   const spotifyControllerRef = useRef(null);
   const [iFrameAPI, setIFrameAPI] = useState(undefined);
   const [playerLoaded, setPlayerLoaded] = useState(false);
+  const [containerHeight, setContainerHeight] = useState(352); // Default fallback
 
   // Load the Spotify iFrame API script
   useEffect(() => {
-    // If the API is already loaded globally, grab it
     if (window.SpotifyIframeApi) {
       setIFrameAPI(window.SpotifyIframeApi);
       return;
     }
-
-    // Avoid loading the script twice
     if (document.querySelector('script[src="https://open.spotify.com/embed/iframe-api/v1"]')) {
       return;
     }
-
     const script = document.createElement('script');
     script.src = 'https://open.spotify.com/embed/iframe-api/v1';
     script.async = true;
     document.body.appendChild(script);
-
-    return () => {
-      // Don't remove — other instances may need it
-    };
   }, []);
 
   // Listen for the API ready callback
   useEffect(() => {
     if (iFrameAPI) return;
-
     window.onSpotifyIframeApiReady = (SpotifyIframeApi) => {
       window.SpotifyIframeApi = SpotifyIframeApi;
       setIFrameAPI(SpotifyIframeApi);
     };
   }, [iFrameAPI]);
 
-  // Create the embedded player once the API is ready
-  // Calculate responsive height based on viewport width
-  const getResponsiveHeight = () => {
-    const vw = window.innerWidth;
-    if (vw < 640) return 152;       // mobile — compact
-    return 352;                      // tablet/desktop — full
-  };
-
+  // Use ResizeObserver to track actual pixel dimensions of the wrapper
   useEffect(() => {
-    if (playerLoaded || !iFrameAPI || !embedRef.current) return;
+    if (!wrapperRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        if (entry.contentRect.height > 0) {
+          setContainerHeight(Math.floor(entry.contentRect.height));
+        }
+      }
+    });
+    observer.observe(wrapperRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  // Create the embedded player once the API is ready and we have a height
+  useEffect(() => {
+    if (playerLoaded || !iFrameAPI || !embedRef.current || containerHeight === 0) return;
 
     iFrameAPI.createController(
       embedRef.current,
       {
         width: '100%',
-        height: String(getResponsiveHeight()),
+        height: String(Math.max(containerHeight, 352)),
         uri: 'spotify:playlist:0MFEfmrnpYEiuUFoIY0e9t',
       },
       (controller) => {
@@ -102,28 +103,25 @@ function SpotifyEmbed() {
         spotifyControllerRef.current.removeListener('playback_update');
       }
     };
-  }, [playerLoaded, iFrameAPI]);
+  }, [playerLoaded, iFrameAPI]); // We only create once, so don't depend on containerHeight here after initial load
 
-  // Resize the iframe when the window size changes
+  // Resize the iframe dynamically when the container size changes
   useEffect(() => {
-    if (!playerLoaded) return;
-
-    const handleResize = () => {
-      const iframe = embedRef.current?.querySelector('iframe');
-      if (iframe) {
-        iframe.style.height = `${getResponsiveHeight()}px`;
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [playerLoaded]);
+    if (!playerLoaded || !wrapperRef.current) return;
+    const iframe = wrapperRef.current.querySelector('iframe');
+    if (iframe) {
+      const h = Math.max(containerHeight, 352);
+      iframe.style.height = `${h}px`;
+      iframe.setAttribute('height', String(h));
+      // iframe.setAttribute('height', String(containerHeight));
+    }
+  }, [playerLoaded, containerHeight]);
 
   return (
-    <div className="w-full">
-      <div ref={embedRef} className="spotify-embed-container rounded-xl overflow-hidden shadow-lg" />
+    <div ref={wrapperRef} className="w-full h-full relative">
+      <div ref={embedRef} className="spotify-embed-container rounded-lg overflow-hidden shadow-lg w-full h-full absolute inset-0" />
       {!playerLoaded && (
-        <div className="flex items-center justify-center h-[100px] text-[var(--color-dark-brown)] opacity-60 font-[family-name:var(--font-body)] text-[clamp(0.75rem,1.5vw,1rem)]">
+        <div className="absolute inset-0 flex items-center justify-center text-[var(--color-dark-brown)] opacity-60 font-[family-name:var(--font-body)] text-[clamp(0.65rem,1.5vw,0.9rem)]">
           Loading Spotify…
         </div>
       )}
@@ -139,38 +137,49 @@ export default function Typewriter() {
       <ScrollReveal variants={fadeInUp} threshold={0.2} className="w-full flex justify-center pb-8 z-10">
         <div className="relative flex flex-col items-center max-w-[850px] w-full z-10">
           
-          {/* Decorative Assets attached to the content area */}
-          <FloatingElement className="absolute top-[10%] -right-1 w-[clamp(100px,18vw,180px)] pointer-events-none z-20 max-sm:top-[5%] max-sm:w-[90px]" duration={4.5} distance={10} delay={0.3}>
+          {/* Decorative Assets */}
+          <FloatingElement className="absolute top-[3%] left-[5%] w-[clamp(100px,18vw,180px)] pointer-events-none z-20 max-sm:top-[10%] max-sm:-left-3 max-sm:w-[100px]" duration={4.5} distance={10} delay={0.3}>
             <img src={cassetteTapes} alt="" className="drop-shadow-lg" loading="lazy" aria-hidden="true" />
           </FloatingElement>
 
-          <FloatingElement className="absolute top-[50%] -left-2 w-[clamp(90px,15vw,150px)] pointer-events-none z-20 max-sm:top-[35%] max-sm:w-[80px]" duration={3.5} distance={12} delay={0.8}>
+          <FloatingElement className="absolute top-[8%] right-[20%] w-[clamp(60px,10vw,100px)] pointer-events-none z-20 max-sm:-top-[1%] max-sm:right-[15%] max-sm:w-[50px]" duration={3.5} distance={12} delay={0.8}>
             <img src={musicNotes} alt="" className="drop-shadow-md" loading="lazy" aria-hidden="true" />
           </FloatingElement>
 
-          <VinylRecord className="absolute -right-8 bottom-[50%] w-[clamp(120px,20vw,200px)] h-[clamp(120px,20vw,200px)] pointer-events-none z-20 animate-spin-slow drop-shadow-xl max-sm:w-[90px] max-sm:h-[90px]" />
+          <VinylRecord className="absolute -right-6 -bottom-[3%] w-[clamp(120px,20vw,200px)] h-[clamp(120px,20vw,200px)] pointer-events-none z-20 animate-spin-slow drop-shadow-xl max-sm:w-[100px] max-sm:h-[100px] max-sm:-right-8 max-sm:bottom-[8%] z-20 oveflow" />
 
-          {/* Heading — above the typewriter */}
-          <h2 className="font-[family-name:var(--font-display)] text-[var(--color-cream)] text-[clamp(1.4rem,4vw,2.4rem)] leading-[1.3] mb-0 mt-2 tracking-[0.05em] text-center z-10 drop-shadow-md">
-            LET'S WORSHIP AND JAM TOGETHER!
-          </h2>
+          {/* Title — lets_jam.png asset */}
+          <img
+            src={letsJamImg}
+            alt="Let's Worship and Jam Together!"
+            className="w-[clamp(220px,45vw,420px)] h-auto object-contain z-10 mb-2 drop-shadow-md max-sm:w-[clamp(200px,60vw,280px)]"
+          />
 
-          {/* Typewriter composition: Asset + Spotify embed on its paper */}
+          {/* Computer composition: Asset + Spotify embed on screen */}
           <motion.div
-            className="relative z-10 w-full flex justify-center mt-0 max-sm:mt-0 will-change-transform"
+            className="relative z-10 w-full flex justify-center mt-0 will-change-transform"
             initial={{ y: 40, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
           >
+            {/* Computer image — on mobile, stretch height to 500px to fit full Spotify player */}
             <img
-              src={typewriterImg}
-              alt="Typewriter illustration"
-              className="w-[125%] max-sm:w-[136%] max-w-none flex-shrink-0 h-auto drop-shadow-2xl"
+              src={computerImg}
+              alt="Computer illustration"
+              className="w-[100%] h-auto max-sm:w-[130%] max-sm:h-[500px] max-w-none flex-shrink-0 drop-shadow-2xl"
             />
             
-            {/* Spotify embed positioned ON the typewriter's paper */}
-            <div className="absolute top-[3%] left-[50%] -translate-x-[50%] flex items-start justify-center w-[64%] max-sm:w-[76%] z-20">
+            {/* Spotify embed positioned ON the computer screen */}
+            {/* Adjusted to fit the bezel of the computer exactly */}
+            <div
+              className="absolute z-20 w-[105%] sm:w-[97%]"
+              style={{
+                top: '5%',
+                // left: '2.5%',
+                height: '65%',
+              }}
+            >
               <SpotifyEmbed />
             </div>
           </motion.div>

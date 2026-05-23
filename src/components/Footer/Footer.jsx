@@ -71,7 +71,7 @@ export default function Footer() {
           <motion.img
             src={ribbonImg}
             alt="Decorative ribbon"
-            className="absolute -top-[10%] -left-8 w-[160px] lg:w-[160px] h-auto z-20 pointer-events-none drop-shadow-md will-change-transform"
+            className="absolute -top-[11%] -left-10 w-[160px] sm:w-[200px] sm:-top-[9%] lg:w-[160px] h-auto z-20 pointer-events-none drop-shadow-md will-change-transform"
             animate={{ rotate: [-4, 4, -4] }}
             transition={{ duration: 0.75, repeat: Infinity, ease: 'linear' }}
           />
@@ -79,7 +79,7 @@ export default function Footer() {
           <TextType
             as="p"
             text="DO YOU REALLY ACCEPT THE MESSAGE THAT GOD IS HEAD OVER HEELS IN LOVE WITH YOU?"
-            className="font-[family-name:var(--font-display)] text-[var(--color-dark-green-text)] text-2xl leading-[1.4] tracking-[0.03em] text-center max-w-[90%]"
+            className="font-[family-name:var(--font-display)] text-[var(--color-dark-green-text)] text-2xl sm:text-5xl leading-[1.4] tracking-[0.03em] text-center max-w-[90%]"
             typingSpeed={50}
             startOnVisible={true}
             loop={false}
