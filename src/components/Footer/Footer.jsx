@@ -71,7 +71,7 @@ export default function Footer() {
           <motion.img
             src={ribbonImg}
             alt="Decorative ribbon"
-            className="absolute -top-[8%] -left-8 w-[160px] lg:w-[160px] h-auto z-20 pointer-events-none drop-shadow-md will-change-transform"
+            className="absolute -top-[10%] -left-8 w-[160px] lg:w-[160px] h-auto z-20 pointer-events-none drop-shadow-md will-change-transform"
             animate={{ rotate: [-4, 4, -4] }}
             transition={{ duration: 0.75, repeat: Infinity, ease: 'linear' }}
           />

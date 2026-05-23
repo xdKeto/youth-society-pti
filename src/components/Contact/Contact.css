@@ -11,3 +11,19 @@
   pointer-events: none;
   z-index: 0;
 }
+
+@keyframes wiggle-vibrate {
+  0%, 100% { transform: rotate(0deg); }
+  5% { transform: rotate(-5deg) scale(1.05); }
+  10% { transform: rotate(5deg) scale(1.05); }
+  15% { transform: rotate(-5deg) scale(1.05); }
+  20% { transform: rotate(5deg) scale(1.05); }
+  25% { transform: rotate(-4deg) scale(1.02); }
+  30% { transform: rotate(4deg) scale(1.02); }
+  35% { transform: rotate(0deg) scale(1); }
+}
+
+.animate-wiggle-vibrate {
+  animation: wiggle-vibrate 3s ease-in-out infinite;
+  transform-origin: center;
+}

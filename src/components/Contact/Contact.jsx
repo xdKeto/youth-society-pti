@@ -109,7 +109,7 @@ export default function Contact() {
               <img
                 src={contactWhatsapp}
                 alt="KLIK THIS!"
-                className="h-[80px] w-auto object-contain drop-shadow-md"
+                className="h-[80px] w-auto object-contain drop-shadow-md animate-wiggle-vibrate"
               />
             </a>
           </ScrollReveal>
