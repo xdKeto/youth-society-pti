@@ -7,6 +7,7 @@ import Envelope from './components/Envelope/Envelope';
 import Typewriter from './components/Typewriter/Typewriter';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
+import { Analytics } from '@vercel/analytics/react';
 
 /**
  * App — Youth Society GKI PTI single-page website.
@@ -41,6 +42,9 @@ export default function App() {
 
       {/* 8. Footer — closing quote blob */}
       <Footer />
+      
+      {/* Vercel Analytics */}
+      <Analytics />
     </main>
   );
 }
